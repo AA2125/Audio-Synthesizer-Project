@@ -1,6 +1,6 @@
 // test 7 with ultrasonic (works)
 
-// the gain of the OpAmp does not matter since the volume control is related to the ultrasonic distance.
+//The gain of the OpAmp does not matter since the volume control is related to the ultrasonic distance.
 
 #include <Tone.h>  //Tone library to generate sounds.
 #include <Adafruit_GFX.h>
@@ -39,7 +39,7 @@ const int WAVE_FREQS[] = { 262, 294, 330, 349, 392, 440, 508, 524 };  // Frequen
 const int TRIGGER_PIN = A3;
 const int ECHO_PIN = A2;
 
-Tone speaker;  // No idea how that works(something to do with the tone libary), i trusted stackoverflow.
+Tone speaker;  // No idea how that works(something to do with the tone library), i trusted stackoverflow.
 
 void setup() {
   Serial.begin(9600);
@@ -59,7 +59,7 @@ void setup() {
   pinMode(TRIGGER_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
 
-  // Display stuff taken from the example libary.
+  // Display stuff taken from the example library.
   if (!display.begin(SSD1306_SWITCHCAPVCC)) {
     Serial.println(F("SSD1306 allocation failed"));
     for (;;)
@@ -72,7 +72,7 @@ void setup() {
 }
 
 void loop() {
-  // Each button is connnected to a tone, using this loop helps in the constant play of the tone rather than a quick tone.
+  // Each button is connected to a tone, using this loop helps in the constant play of the tone rather than a quick tone.
   for (int i = 0; i < NUM_BUTTONS; i++) {
     bool buttonState = digitalRead(BUTTON_PINS[i]);
 
@@ -81,12 +81,12 @@ void loop() {
       digitalWrite(LED_PIN, HIGH);  // Turn on the LED
 
       ///////////////////////////////////////////////////////////////
-      // related to the ultrasonic stuff (barrowed from 2E10 days)
+      // related to the ultrasonic stuff (borrowed from 2E10 days)
       // Measure distance with ultrasonic sensor.
       int distance = measureDistance();
 
       // Adjust volume based on distance.
-      int volume = map(distance, 0, 170, 0, 800);  // i can adjust the distance to control the voulme, values are not final yet
+      int volume = map(distance, 0, 170, 0, 800);  // i can adjust the distance to control the volume, values are not final yet
 
       // Play the corresponding tone with adjusted volume
       speaker.play(WAVE_FREQS[i], volume);
